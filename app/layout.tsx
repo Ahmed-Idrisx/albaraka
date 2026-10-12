@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Changa, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
+import { Providers } from "@/providers/providers";
 
 const changa = Changa({
   variable: "--font-changa",
@@ -54,10 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${changa.variable} ${plexArabic.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col" suppressHydrationWarning>
-        <Script id="install-prompt-capture" strategy="beforeInteractive">
-          {`(function(){var w=window;w.__abInstall=null;function s(e){e&&e.preventDefault();w.__abInstall=e||null;w.dispatchEvent(new Event("ab:installprompt"))}w.addEventListener("beforeinstallprompt",s);w.addEventListener("appinstalled",function(){s(null)})})();`}
-        </Script>
-        {children}
+        <Providers>{children}</Providers>
         <Toaster position="top-center" richColors />
       </body>
     </html>
