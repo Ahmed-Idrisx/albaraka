@@ -1,3 +1,5 @@
+import { Loading } from "@/components/shared/States";
+
 export default function DashboardLoading() {
-  return <div>Dashboard Loading</div>;
+  return <Loading />;
 }
