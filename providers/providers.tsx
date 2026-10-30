@@ -2,7 +2,6 @@
 
 import { useState, type ReactNode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { DirectionProvider } from "@radix-ui/react-direction";
 import { ThemeProvider } from "next-themes";
 import { createQueryClient } from "@/lib/queryClient";
 
@@ -17,7 +16,7 @@ export function Providers({ children }: { children: ReactNode }) {
         enableSystem
         disableTransitionOnChange
       >
-        <DirectionProvider dir="rtl">{children}</DirectionProvider>
+        {children}
       </ThemeProvider>
     </QueryClientProvider>
   );

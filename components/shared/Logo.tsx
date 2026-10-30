@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { BrandMark } from "./BrandMark";
 
@@ -9,12 +10,13 @@ interface LogoProps {
   withTagline?: boolean;
 }
 
-/** The ب mark plus the wordmark — the same lockup the app icon and favicon are cut from. */
+/** The brand mark plus the wordmark — the same lockup the app icon and favicon are cut from. */
 export function Logo({
   tone = "dark",
   className,
   withTagline = false,
 }: LogoProps) {
+  const t = useTranslations("brand");
   return (
     <Link href="/" className={cn("inline-flex items-center gap-2", className)}>
       <BrandMark tone={tone} className="size-9" />
@@ -25,7 +27,7 @@ export function Logo({
             tone === "dark" ? "text-brand-900" : "text-white",
           )}
         >
-          البركة
+          {t("name")}
         </span>
         {withTagline && (
           <span
@@ -34,7 +36,7 @@ export function Logo({
               tone === "dark" ? "text-muted-foreground" : "text-brand-300",
             )}
           >
-            خضار وفاكهة طازجة
+            {t("tagline")}
           </span>
         )}
       </span>

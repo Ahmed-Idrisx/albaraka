@@ -15,7 +15,7 @@ export function BrandMark({ tone = "dark", className }: BrandMarkProps) {
   return (
     <span
       className={cn(
-        "flex items-center justify-center rounded-xl",
+        "flex items-center justify-center rounded-full",
         tone === "dark" ? "bg-primary" : "bg-white",
         className,
       )}
@@ -29,7 +29,7 @@ export function BrandMark({ tone = "dark", className }: BrandMarkProps) {
           d={BOWL}
           fill="none"
           stroke={
-            tone === "dark" ? "var(--primary-foreground)" : "var(--color-panel)"
+            tone === "dark" ? "var(--primary-foreground)" : "var(--sidebar)"
           }
           strokeWidth={STROKE}
           strokeLinecap="round"
