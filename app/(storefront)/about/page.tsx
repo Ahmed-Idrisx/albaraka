@@ -36,7 +36,7 @@ export default function AboutPage() {
             ),
           })}
         />
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-card">
+        <div className="relative aspect-4/3 overflow-hidden rounded-3xl shadow-card">
           <Image
             src={STORE_IMAGES.vegetables}
             placeholder="blur"
@@ -64,7 +64,9 @@ export default function AboutPage() {
                 </span>
                 <Icon className="size-5 text-primary" />
               </div>
-              <h3 className="mb-2 text-lg font-bold">{t(`steps.${key}.title`)}</h3>
+              <h3 className="mb-2 text-lg font-bold">
+                {t(`steps.${key}.title`)}
+              </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
                 {t(`steps.${key}.text`)}
               </p>
@@ -74,7 +76,7 @@ export default function AboutPage() {
       </section>
 
       <section className="relative rounded-3xl bg-secondary px-6 py-14 text-center">
-        <span className="absolute -top-3 end-6 rotate-6 rounded-full bg-fruit-lemon px-3 py-1 text-xs font-bold text-black shadow">
+        <span className="absolute -top-3 inset-e-6 rotate-6 rounded-full bg-fruit-lemon px-3 py-1 text-xs font-bold text-black shadow">
           {t("guaranteeBadge")}
         </span>
         <h2 className="mx-auto max-w-2xl text-2xl leading-relaxed font-extrabold sm:text-3xl">
