@@ -1,49 +1,49 @@
+import type { OrderStatus } from "@/lib/types";
+
+/** Labels are translation keys under "nav" (storefront) and "dashboard.nav". */
 export const STORE_LINKS = [
-  { href: "/products", label: "كل المنتجات" },
-  { href: "/track", label: "تتبع طلبك" },
-  { href: "/delivery-areas", label: "مناطق التوصيل" },
-  { href: "/about", label: "من نحن" },
+  { href: "/", label: "home" },
+  { href: "/products", label: "products" },
+  { href: "/track", label: "track" },
+  { href: "/delivery-areas", label: "deliveryAreas" },
+  { href: "/about", label: "about" },
 ] as const;
 
-/** The header's own nav. Shared by the desktop bar and the mobile drawer. */
-export const HEADER_LINKS = [
-  { href: "/", label: "الرئيسية" },
-  { href: "/about", label: "عن البركة" },
-  { href: "/#categories", label: "الأقسام" },
-  { href: "/products", label: "كل المنتجات" },
-  { href: "/delivery-areas", label: "مناطق التوصيل" },
-  { href: "/track", label: "تتبع طلبك" },
+export const DASHBOARD_LINKS = [
+  { href: "/dashboard", label: "overview", icon: "home" },
+  { href: "/dashboard/orders", label: "orders", icon: "orders" },
+  { href: "/dashboard/products", label: "products", icon: "products" },
+  { href: "/dashboard/categories", label: "categories", icon: "categories" },
+  { href: "/dashboard/delivery-areas", label: "deliveryAreas", icon: "delivery" },
+  { href: "/dashboard/settings", label: "settings", icon: "settings" },
 ] as const;
 
-export const ORDER_STATUS_LABELS = {
-  pending: "قيد الانتظار",
-  confirmed: "مؤكد",
-  preparing: "تحت التجهيز",
-  out_for_delivery: "في الطريق",
-  delivered: "تم التسليم",
-  cancelled: "ملغي",
-} as const;
+/** In order; labels live under the "orderStatus" messages. */
+export const ORDER_STATUSES: OrderStatus[] = [
+  "pending",
+  "confirmed",
+  "preparing",
+  "out_for_delivery",
+  "delivered",
+  "cancelled",
+];
 
-export const ORDER_STATUS_COLORS = {
-  pending: "var(--color-status-pending)",
-  confirmed: "var(--color-status-confirmed)",
-  preparing: "var(--color-status-preparing)",
-  out_for_delivery: "var(--color-status-delivering)",
-  delivered: "var(--color-status-delivered)",
-  cancelled: "var(--color-status-cancelled)",
-} as const;
+/** Badge classes per status — built on the --color-status-* tokens, so dark mode follows. */
+export const ORDER_STATUS_STYLES: Record<OrderStatus, string> = {
+  pending: "bg-status-pending/15 text-status-pending",
+  confirmed: "bg-status-confirmed/15 text-status-confirmed",
+  preparing: "bg-status-preparing/15 text-status-preparing",
+  out_for_delivery: "bg-status-delivering/15 text-status-delivering",
+  delivered: "bg-status-delivered/15 text-status-delivered",
+  cancelled: "bg-status-cancelled/15 text-status-cancelled",
+};
 
-/** Tailwind classes per status — mirrors the --color-status-* tokens. */
-export const ORDER_STATUS_STYLES = {
-  pending: "bg-status-pending/15 text-status-pending border-status-pending/30",
-  confirmed:
-    "bg-status-confirmed/15 text-status-confirmed border-status-confirmed/30",
-  preparing:
-    "bg-status-preparing/15 text-status-preparing border-status-preparing/30",
-  out_for_delivery:
-    "bg-status-delivering/15 text-status-delivering border-status-delivering/30",
-  delivered:
-    "bg-status-delivered/15 text-status-delivered border-status-delivered/30",
-  cancelled:
-    "bg-status-cancelled/15 text-status-cancelled border-status-cancelled/30",
-} as const;
+/** Bar colour per status in the dashboard chart. */
+export const ORDER_STATUS_BAR: Record<OrderStatus, string> = {
+  pending: "bg-status-pending",
+  confirmed: "bg-status-confirmed",
+  preparing: "bg-status-preparing",
+  out_for_delivery: "bg-status-delivering",
+  delivered: "bg-status-delivered",
+  cancelled: "bg-status-cancelled",
+};
