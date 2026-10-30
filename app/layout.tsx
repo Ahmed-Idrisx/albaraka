@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Changa, IBM_Plex_Sans_Arabic } from "next/font/google";
-import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Toaster } from "sonner";
 import { Providers } from "@/providers/providers";
+import { directionOf, type Locale } from "@/i18n/config";
+import "./globals.css";
 
+// Both fonts carry Latin letters too, so English uses the same type.
 const changa = Changa({
   variable: "--font-changa",
   subsets: ["arabic", "latin"],
@@ -11,35 +15,33 @@ const changa = Changa({
 });
 
 const plexArabic = IBM_Plex_Sans_Arabic({
-  variable: "--font-sans",
+  variable: "--font-plex",
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "البركة | خضار وفاكهة طازجة",
-    template: "%s | البركة",
-  },
-  description:
-    "خضار وفاكهة طازجة توصلك خلال ساعة. اطلب أونلاين والدفع عند الاستلام.",
-  manifest: "/manifest.webmanifest",
-  icons: {
-    icon: [
-      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: "/icons/apple-touch-icon.png",
-  },
-  appleWebApp: {
-    capable: true,
-    title: "البركة",
-    statusBarStyle: "default",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("meta");
+  return {
+    title: { default: t("title"), template: `%s | ${t("shortName")}` },
+    description: t("description"),
+    manifest: "/manifest.webmanifest",
+    icons: {
+      icon: [
+        { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+        { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: "/icons/apple-touch-icon.png",
+    },
+    appleWebApp: {
+      capable: true,
+      title: t("shortName"),
+      statusBarStyle: "default",
+    },
+  };
+}
 
-// Colours the browser's own chrome on mobile, so it follows the theme instead of
-// leaving a green bar above a dark page.
+// Colours the browser's own chrome on mobile so it follows the theme.
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#2F6B3C" },
@@ -47,17 +49,24 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const locale = (await getLocale()) as Locale;
+  const dir = directionOf(locale);
+
   return (
     <html
-      lang="ar"
-      dir="rtl"
+      lang={locale}
+      dir={dir}
       suppressHydrationWarning
-      className={`${changa.variable} ${plexArabic.variable} h-full antialiased`}
+      className={`${changa.variable} ${plexArabic.variable} antialiased`}
     >
-      <body className="flex min-h-full flex-col" suppressHydrationWarning>
-        <Providers>{children}</Providers>
-        <Toaster position="top-center" richColors />
+      {/* Browser extensions (e.g. ClickUp) add classes to <body> before React
+          loads; this keeps that from being reported as a hydration error. */}
+      <body className="flex min-h-dvh flex-col" suppressHydrationWarning>
+        <NextIntlClientProvider>
+          <Providers>{children}</Providers>
+        </NextIntlClientProvider>
+        <Toaster position="top-center" richColors dir={dir} />
       </body>
     </html>
   );
