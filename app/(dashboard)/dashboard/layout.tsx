@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCurrentUser, useLogout } from "@/features/auth/hooks/useAuth";
-import { Sidebar } from "@/components/dashboard/Sidebar";
+import { Sidebar } from "@/features/dashboard/components/Sidebar";
 import { Logo } from "@/components/shared/Logo";
 import { Loading } from "@/components/shared/States";
 
