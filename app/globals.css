@@ -1,9 +1,8 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
+/* Brand palette. Each value is redefined under .dark further down. */
 @theme {
   --color-brand-900: #1f4b27;
   --color-brand-700: #2f6b3c;
@@ -17,71 +16,48 @@
   --color-fruit-lemon: #f2c94c;
   --color-fruit-plum: #7b4f99;
 
-  --color-status-pending: #f4a340;
-  --color-status-confirmed: #3b82c4;
+  --color-status-pending: #c27a12;
+  --color-status-confirmed: #2f6fae;
   --color-status-preparing: #7b4f99;
-  --color-status-delivering: #2aa8a0;
+  --color-status-delivering: #1f8b84;
   --color-status-delivered: #2f6b3c;
   --color-status-cancelled: #c0392b;
 
   --font-display: var(--font-changa), system-ui, sans-serif;
 
   --shadow-card:
-    0 2px 6px rgb(31 75 39 / 0.08), 0 10px 20px -8px rgb(31 75 39 / 0.22);
+    0 1px 2px rgb(31 75 39 / 0.06), 0 8px 20px -10px rgb(31 75 39 / 0.25);
   --shadow-card-hover:
-    0 6px 14px rgb(31 75 39 / 0.12), 0 22px 40px -12px rgb(31 75 39 / 0.32);
+    0 4px 10px rgb(31 75 39 / 0.1), 0 20px 36px -14px rgb(31 75 39 / 0.35);
 }
 
+/* Semantic tokens — pages use these, so they follow light/dark automatically. */
 @theme inline {
-  --font-sans: var(--font-sans);
-  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-plex), system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
 
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-
-  --color-panel: var(--panel);
-  --color-panel-foreground: var(--panel-foreground);
-  --color-panel-muted: var(--panel-muted);
-
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 :root {
@@ -89,37 +65,22 @@
   --foreground: #1e2a1f;
   --card: #ffffff;
   --card-foreground: #1e2a1f;
-  --popover: #ffffff;
-  --popover-foreground: #1e2a1f;
   --primary: var(--color-brand-700);
   --primary-foreground: #ffffff;
   --secondary: var(--color-brand-100);
   --secondary-foreground: var(--color-brand-900);
   --muted: #f0eee6;
-  --muted-foreground: #6b7a6d;
-  --accent: var(--color-brand-100);
-  --accent-foreground: var(--color-brand-900);
+  --muted-foreground: #66756a;
   --destructive: var(--color-status-cancelled);
   --border: #e3e0d5;
-  --input: #e3e0d5;
+  --input: #dcd8cb;
   --ring: var(--color-brand-500);
-  --chart-1: var(--color-brand-700);
-  --chart-2: var(--color-brand-500);
-  --chart-3: var(--color-brand-300);
-  --chart-4: var(--color-fruit-citrus);
-  --chart-5: var(--color-fruit-plum);
   --radius: 0.75rem;
-  --panel: var(--color-brand-900);
-  --panel-foreground: var(--color-brand-100);
-  --panel-muted: var(--color-brand-300);
+
   --sidebar: var(--color-brand-900);
   --sidebar-foreground: var(--color-brand-100);
-  --sidebar-primary: var(--color-brand-300);
-  --sidebar-primary-foreground: var(--color-brand-900);
-  --sidebar-accent: rgb(255 255 255 / 8%);
-  --sidebar-accent-foreground: #ffffff;
+  --sidebar-accent: rgb(255 255 255 / 10%);
   --sidebar-border: rgb(255 255 255 / 12%);
-  --sidebar-ring: var(--color-brand-300);
 }
 
 .dark {
@@ -150,66 +111,81 @@
   --foreground: #eef3ec;
   --card: #1b231c;
   --card-foreground: #eef3ec;
-  --popover: #1b231c;
-  --popover-foreground: #eef3ec;
   --primary: var(--color-brand-300);
-
   --primary-foreground: #10210f;
   --secondary: #253026;
   --secondary-foreground: #eef3ec;
   --muted: #253026;
   --muted-foreground: #9fb0a0;
-  --accent: #253026;
-  --accent-foreground: #eef3ec;
   --destructive: #e06b5d;
   --border: rgb(255 255 255 / 10%);
   --input: rgb(255 255 255 / 15%);
-  --ring: var(--color-brand-500);
-  --chart-1: var(--color-brand-300);
-  --chart-2: var(--color-brand-500);
-  --chart-3: var(--color-brand-700);
-  --chart-4: var(--color-fruit-citrus);
-  --chart-5: var(--color-fruit-plum);
-
-  --panel: #101610;
-  --panel-foreground: #d8e6d3;
-  --panel-muted: #8fc282;
 
   --sidebar: #101610;
   --sidebar-foreground: #d8e6d3;
-  --sidebar-primary: var(--color-brand-300);
-  --sidebar-primary-foreground: #10210f;
   --sidebar-accent: rgb(255 255 255 / 8%);
-  --sidebar-accent-foreground: #ffffff;
   --sidebar-border: rgb(255 255 255 / 10%);
-  --sidebar-ring: var(--color-brand-500);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground overflow-x-hidden;
-  }
-
-  button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]) {
-    cursor: pointer;
-  }
   html {
     @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
   }
   h1,
   h2,
   h3 {
     @apply font-display;
   }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
 }
 
+/* The few building blocks every page reuses. */
 @layer components {
+  .btn {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-outline {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg border bg-card px-4 text-sm font-medium transition hover:bg-secondary focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex size-10 items-center justify-center rounded-lg transition hover:bg-secondary focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none;
+  }
+  .btn-danger {
+    @apply inline-flex h-9 items-center justify-center gap-1 rounded-lg px-3 text-sm font-medium text-destructive transition hover:bg-destructive/10 disabled:opacity-50;
+  }
+  .input {
+    @apply h-10 w-full rounded-lg border border-input bg-card px-3 text-sm transition outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-3 focus:ring-ring/25 aria-invalid:border-destructive aria-invalid:focus:ring-destructive/20;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium;
+  }
+  .card {
+    @apply rounded-xl border bg-card p-4 text-card-foreground shadow-card;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+  .table {
+    @apply w-full text-sm [&_td]:p-3 [&_th]:p-3 [&_th]:text-start [&_th]:font-medium [&_th]:text-muted-foreground [&_thead]:bg-muted/60 [&_tbody_tr]:border-t [&_tbody_tr]:transition-colors [&_tbody_tr:hover]:bg-muted/40;
+  }
+  /* Background behind product and category photos. Most product photos are
+     cut out (transparent), so they sit on white in light mode and on a soft
+     green-grey in dark mode instead of a glaring white box. */
+  .photo-frame {
+    @apply bg-white dark:bg-secondary;
+  }
+  /* The little price sticker on discounted products, like the ones on real fruit.
+     It sits inside the photo's corner so scrolling rows never clip it. */
   .plu-sticker {
-    @apply absolute -top-2.5 -start-2.5 z-10 rotate-[-8deg] rounded-full border-[1.5px]
-      border-dashed border-white px-2.5 py-1 text-[10px] font-extrabold shadow-sm;
+    @apply absolute top-2 start-2 z-10 -rotate-6 rounded-full border-[1.5px] border-dashed border-white bg-fruit-tomato px-2.5 py-1 text-[11px] font-extrabold text-white shadow-sm;
   }
 }
