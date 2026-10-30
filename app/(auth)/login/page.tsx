@@ -1,25 +1,27 @@
 import type { Metadata } from "next";
-
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { LoginForm } from "@/features/auth/components/LoginForm";
 import { Logo } from "@/components/shared/Logo";
+import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
 
-export const metadata: Metadata = {
-  title: "تسجيل الدخول",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("auth");
+  return { title: t("metaTitle") };
+}
 
 export default function LoginPage() {
+  const t = useTranslations("auth");
+
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-brand-50 p-6">
-      <div className="w-full max-w-sm rounded-2xl border bg-card p-8 shadow-sm">
-        <Logo className="mb-6" withTagline />
-        <h1 className="mb-1 font-display text-xl font-bold text-brand-900">
-          دخول لوحة التحكم
-        </h1>
-        <p className="mb-6 text-sm text-muted-foreground">
-          هذه الصفحة لفريق المتجر فقط.
-        </p>
+    <main className="flex min-h-dvh flex-col items-center justify-center gap-4 p-4">
+      <div className="card w-full max-w-sm p-6">
+        <Logo className="mb-6" />
+        <h1 className="mb-1 text-xl font-bold">{t("title")}</h1>
+        <p className="mb-6 text-sm text-muted-foreground">{t("subtitle")}</p>
         <LoginForm />
       </div>
+      <LanguageSwitcher />
     </main>
   );
 }

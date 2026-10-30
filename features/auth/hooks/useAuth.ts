@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { authApi } from "@/features/auth/api/auth.api";
+import { authApi } from "@/lib/api";
 import type { LoginFormValues } from "@/features/auth/schemas/loginSchema";
 import { getErrorMessage } from "@/lib/apiClient";
 import { queryKeys } from "@/lib/queryClient";
