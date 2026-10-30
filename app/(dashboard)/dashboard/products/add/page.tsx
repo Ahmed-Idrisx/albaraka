@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ProductForm } from "@/components/dashboard/ProductForm";
+import { ProductForm } from "@/features/products/components/ProductForm";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 
 export default function AddProductPage() {
