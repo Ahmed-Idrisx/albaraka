@@ -20,11 +20,6 @@ interface ImageUploadProps {
   onChange?: (file: File | null) => void;
 }
 
-/**
- * Click or drop an image. Shows the picked (or current) image, with buttons to
- * change or undo the choice. The real <input type="file"> carries the file,
- * so forms built with `new FormData(form)` need nothing extra.
- */
 export function ImageUpload({
   name,
   currentUrl,
@@ -123,9 +118,7 @@ export function ImageUpload({
             <span className="flex size-12 items-center justify-center rounded-full bg-secondary text-primary">
               <ImagePlus className="size-6" />
             </span>
-            <span className="font-medium text-foreground">
-              {t("choose")}
-            </span>
+            <span className="font-medium text-foreground">{t("choose")}</span>
             <span className="text-xs">{t("dropHint")}</span>
           </span>
         )}

@@ -9,10 +9,6 @@ import { categoriesApi } from "@/lib/api";
 import { queryKeys } from "@/lib/queryClient";
 import { useLocalized } from "@/i18n/useLocalized";
 
-/**
- * The "404" is cut out of a real fruit photo and wears the same price sticker
- * as the product cards, so it reads as a shelf that ran out of this item.
- */
 export function NotFoundContent() {
   const t = useTranslations("notFound");
   const localized = useLocalized();

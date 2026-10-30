@@ -35,7 +35,9 @@ export function DashboardHeader({
           <p className="mt-1 text-sm text-muted-foreground">{description}</p>
         )}
       </div>
-      {action && <div className="flex flex-wrap items-center gap-2">{action}</div>}
+      {action && (
+        <div className="flex flex-wrap items-center gap-2">{action}</div>
+      )}
     </div>
   );
 }

@@ -11,7 +11,6 @@ interface SwitchProps {
   name?: string;
 }
 
-/** An on/off toggle. A real (hidden) checkbox keeps it keyboard and screen-reader friendly. */
 export function Switch({
   checked,
   onChange,

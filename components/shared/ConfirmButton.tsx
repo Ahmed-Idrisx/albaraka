@@ -12,10 +12,6 @@ interface ConfirmButtonProps {
   disabled?: boolean;
 }
 
-/**
- * A delete button that asks "are you sure?" in place instead of the browser's
- * confirm() popup. Goes back to normal after a few seconds.
- */
 export function ConfirmButton({
   onConfirm,
   children,

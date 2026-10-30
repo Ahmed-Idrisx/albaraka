@@ -20,11 +20,6 @@ interface BilingualFieldProps {
   onChangeAr?: (value: string) => void;
 }
 
-/**
- * One field typed twice: Arabic (required) and English (optional — the site
- * shows the Arabic when it's empty). Each input keeps its own writing
- * direction whatever language the dashboard is in.
- */
 export function BilingualField({
   name,
   label,
@@ -70,7 +65,7 @@ export function BilingualField({
         {/* A small tag in the corner says which language goes in the box. */}
         <span
           dir={props.dir}
-          className="pointer-events-none absolute top-1.5 start-3 text-[10px] font-medium tracking-wide text-muted-foreground uppercase"
+          className="pointer-events-none absolute top-1.5 inset-s-3 text-[10px] font-medium tracking-wide text-muted-foreground uppercase"
         >
           {lang === "ar" ? t("arabic") : t("english")}
         </span>

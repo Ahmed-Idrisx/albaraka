@@ -26,10 +26,6 @@ interface SelectProps<T extends string> {
   className?: string;
 }
 
-/**
- * A themed dropdown (the browser's own <select> list can't be styled).
- * Works with the mouse and keyboard: arrows to move, Enter to pick, Esc to close.
- */
 export function Select<T extends string>({
   value,
   onChange,
@@ -61,7 +57,12 @@ export function Select<T extends string>({
   }, [open]);
 
   const openList = () => {
-    setActive(Math.max(0, options.findIndex((o) => o.value === value)));
+    setActive(
+      Math.max(
+        0,
+        options.findIndex((o) => o.value === value),
+      ),
+    );
     setOpen(true);
   };
 
